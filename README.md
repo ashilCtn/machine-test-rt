@@ -92,12 +92,28 @@ The application validates:
 * A room must be selected before booking
 * Already-booked rooms cannot be booked for overlapping dates
 
+## Already-Booked Room Example
+
+The following bookings are hardcoded in `src/data/bookings.js` and can be used to test the "room already booked" validation:
+
+| Room Code | Booked Check-in | Booked Check-out |
+| --------- | ---------------- | ----------------- |
+| R101      | 2026-09-15        | 2026-09-18         |
+| R201      | 2026-09-20        | 2026-09-23         |
+
+To trigger the validation:
+
+1. Select **R101** (Deluxe Room).
+2. Set check-in to `2026-09-16` and check-out to `2026-09-17` (any range overlapping `2026-09-15` – `2026-09-18`).
+3. The app shows: **"Room is already booked for the selected dates."**
+
+Selecting a non-overlapping range for R101 (e.g. `2026-09-19` to `2026-09-20`) or a different room (e.g. R102) for the same dates as R101 will succeed instead.
+
 ## Improvements With More Time
 
 If more time were available, I would consider:
 
-* Add a max-guests filter
-* Add unit tests for booking and price calculations
+* Add unit tests for the night/price calculation and booking-overlap logic
 * Add more comprehensive booking availability handling
 * Store room and booking data using a backend/database
 * Improve accessibility and user feedback
